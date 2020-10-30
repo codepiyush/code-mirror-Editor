@@ -15,7 +15,12 @@ function App() {
   };
   console.log(editorRef);
 
- 
+  const handleClick = () => {
+    let error = document.createElement("div");
+    error.innerHTML = "this is error";
+    console.log(editorRef.doc.lineInfo(1));
+    editorRef.doc.addLineWidget(0, error, {});
+  };
 
   return (
     <div className="App">
