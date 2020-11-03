@@ -7,7 +7,7 @@ function App() {
   const [code, setCode] = useState("");
   console.log(code);
   let [editorRef, setEditor] = useState({});
-
+  let [widget, setWidget] = useState([])
   const handleEditorDidMount = (editor) => {
     // console.log(editor)
     // editorRef = editor;
@@ -19,7 +19,14 @@ function App() {
     let error = document.createElement("div");
     error.innerHTML = "this is error";
     console.log(editorRef.doc.lineInfo(1));
-    editorRef.doc.addLineWidget(0, error, {});
+    let newWidget  = editorRef.doc.addLineWidget(0, error, {});
+    setWidget([
+      ...widget,
+      newWidget
+    ])
+  };
+  const handleClickClear = () => {
+    widget.forEach((wid=>wid.clear()))
   };
 
   return (
@@ -40,6 +47,8 @@ function App() {
         editorDidMount={handleEditorDidMount}
       />
       <button onClick={handleClick}>add lilne widget</button>
+      <button onClick={handleClickClear}>clear widget</button>
+
     </div>
   );
 }
